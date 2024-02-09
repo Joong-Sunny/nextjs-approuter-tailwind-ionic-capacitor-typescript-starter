@@ -6,7 +6,7 @@ const nextConfig = {
   },
   swcMinify: true,
   transpilePackages: ['@ionic/react', '@ionic/core', '@stencil/core', 'ionicons'],
-  output: 'export',
+  // output: 'export', // for capacitor, disable this when you develop with web
   distDir: 'out',
   trailingSlash: true,
 };
