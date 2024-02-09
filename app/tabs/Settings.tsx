@@ -16,16 +16,27 @@ import Store from '@/store';
 import * as selectors from '@/store/selectors';
 import { setSettings } from '@/store/actions';
 import { useEffect, useState } from 'react';
+import { getNotificationInformation } from '@/app/tabs/actions';
 
 const Settings = () => {
   const settings = Store.useState(selectors.getSettings);
   const [notificationState, setNotificationState] = useState(false);
 
+  const fetchNotificationState = async () => {
+    try {
+      return await getNotificationInformation();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/api/user-notification`)
-      .then(response => response.json())
+    fetchNotificationState()
       .then(data => {
-        setNotificationState(data.notifications);
+        setNotificationState(data!!);
+      })
+      .catch(e => {
+        console.error(e);
       });
   }, []);
 
