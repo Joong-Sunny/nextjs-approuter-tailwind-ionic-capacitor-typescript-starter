@@ -1,4 +1,4 @@
-# Next.js + AppRouter + Typescript + Tailwind CSS + Ionic Framework + Capacitor Mobile Starter
+# Next.js 14 + AppRouter + Typescript + Tailwind CSS + Ionic Framework + Capacitor Mobile Starter
 
 ![Screenshot](./screenshot.png)
 
@@ -8,18 +8,36 @@ Next.js handles the production React app experience, Tailwind can be used to sty
 
 See this blog post for an overview of the stack and how it all works: https://dev.to/ionic/build-mobile-apps-with-tailwind-css-next-js-ionic-framework-and-capacitor-3kij
 
-## Usage
+## Usage 1: for web
+
+```bash
+npm run dev
+```
+
+you can see your project on localhost(:3000) directly as normal web dev
+
+## Usage 2: for mobile
 
 This project is a standard Next.js app, so the typical Next.js development process applies (`npm run dev` for browser-based development). However, there is one caveat: the app must be exported to deploy to iOS and Android, since it must run purely client-side. ([more on Next.js export](https://nextjs.org/docs/advanced-features/static-html-export))
 
-To build the app, run:
+2-1: config export
+
+go to next.config.js and enable option below
+
+```javascript
+ output: 'export'
+```
+
+it will make `./out/` directory in your project. These files need to be copied to the native iOS and Android projects, and this is where Capacitor comes in:
+
+2-1: build the app, run:
 
 ```bash
 npm run build
-npm run export
 ```
 
-All the client side files will be sent to the `./out/` directory. These files need to be copied to the native iOS and Android projects, and this is where Capacitor comes in:
+npm run build will export your project  
+(~~npm run export~~ not needed after next.js 13.4)
 
 ```bash
 npx cap sync
